@@ -1,0 +1,23 @@
+---
+- name: Deploy Node.js app on Docker host
+  hosts: "{{ inventory_hostname }}"
+  become: yes
+  tasks:
+    - name: Pull Docker image
+      docker_image:
+        name: "{{ docker_image_name }}:{{ docker_image_tag }}"
+        source: pull
+
+    - name: Stop and remove running container
+      docker_container:
+        name: "{{ docker_container_name }}"
+        state: stopped
+        remove: yes
+
+    - name: Run Docker container
+      docker_container:
+        name: "{{ docker_image_name }}-{{ docker_image_tag }}"
+        image: "{{ docker_image_name }}:{{ docker_image_tag }}"
+        restart_policy: always
+        ports:
+          - "80:3000"
