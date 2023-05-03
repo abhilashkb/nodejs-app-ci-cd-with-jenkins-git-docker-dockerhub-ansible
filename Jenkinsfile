@@ -17,8 +17,10 @@ pipeline {
        sh "docker push 224574/nodejs-app:${DOCK_TAG}"
         }
     }
-}
+    
+
 def getVersion(){
     commitid = sh returnStdout: true, script: '''git rev-parse HEAD'''
     return commitid
 }
+  }
