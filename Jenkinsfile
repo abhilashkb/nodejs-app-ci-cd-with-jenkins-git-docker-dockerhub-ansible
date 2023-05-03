@@ -12,14 +12,6 @@ pipeline {
 	          env.DOCK_TAG = getVersion()
              } 
             }
-        stage("Docker build"){
-             sh "docker build . -t 224574/nodejs-app:${DOCK_TAG}"
-        }
-        stage('Docker Push'){
-         withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-          sh "docker login -u 224574 -p ${dockerhubpwd}"
-         }
-       sh "docker push 224574/nodejs-app:${DOCK_TAG}"
-        }
+        
     }
 }
