@@ -15,7 +15,12 @@ pipeline {
             }
             }
         }
-        stage("Docker build"){
+        stage("Docker Build"){
+            steps{
+                sh "docker build . 224574/nodejs-app:${DOCK_TAG}"
+            }
+        }
+        stage("Docker Push"){
             steps{
                 echo "${DOCK_TAG}"
                 withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
