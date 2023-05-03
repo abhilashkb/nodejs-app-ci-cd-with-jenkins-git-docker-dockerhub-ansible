@@ -17,7 +17,7 @@ pipeline {
         }
         stage("Docker Build"){
             steps{
-                sh "docker build . 224574/nodejs-app:${DOCK_TAG}"
+                sh "docker build . -t 224574/nodejs-app:${DOCK_TAG}"
             }
         }
         stage("Docker Push"){
