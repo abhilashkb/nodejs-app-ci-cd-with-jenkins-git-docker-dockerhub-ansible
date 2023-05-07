@@ -1,8 +1,12 @@
 ---
 - name: Deploy Node.js app on Docker host
-  hosts: "{{ inventory_hostname }}"
-  become: yes
+  hosts: dockerdevhost
+  become: true
   tasks:
+    - name: Install python pip
+      package:
+        name: python-pip
+        state: present
     - name: Pull Docker image
       docker_image:
         name: "{{ docker_image_name }}:{{ docker_image_tag }}"
@@ -16,8 +20,8 @@
 
     - name: Run Docker container
       docker_container:
-        name: "{{ docker_image_name }}-{{ docker_image_tag }}"
+        name: "{{ docker_container_name }}"
         image: "{{ docker_image_name }}:{{ docker_image_tag }}"
         restart_policy: always
         ports:
-          - "80:3000"
+          - "8083:3000"
