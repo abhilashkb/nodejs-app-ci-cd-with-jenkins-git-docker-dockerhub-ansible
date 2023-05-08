@@ -1,7 +1,7 @@
 version: "2"
 services:
         node-jsapp:
-                image: $(dimage)
+                image: node-jsapp
                 ports:
                         - 8084:3000
         mysql:
@@ -14,5 +14,5 @@ services:
                   MYSQL_USER: user
                   MYSQL_PASSWORD: mypassword
                 volumes:
-                  - /opt/docker/nodeapp/sql-file.sql:/docker-entrypoint-initdb.d/init.sql
-                  - /opt/docker/nodeapp/mysql_data:/var/lib/mysql
+                  - ./sql-file.sql:/docker-entrypoint-initdb.d/init.sql
+                  - ./mysql_data:/var/lib/mysql

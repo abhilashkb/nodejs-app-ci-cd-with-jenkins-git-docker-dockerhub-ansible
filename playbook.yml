@@ -10,16 +10,21 @@
       docker_image:
         name: "{{ docker_image_name }}:{{ DOCK_TAG }}"
         source: pull
-
-    - name: Stop and remove running container
-      docker_container:
-        name: "my-nodeapp"
-        state: absent
-    - name: Run Docker container
-      docker_container:
-        name: "my-nodeapp"
-        image: "{{ docker_image_name }}:{{ DOCK_TAG }}"
-        state: started
-        restart_policy: always
-        ports:
-          - "8083:3000"
+    - name: Creates directory
+      file:
+       path: /opt/docker/nodeapp
+       state: directory
+    - name: Copy file to remote host
+      copy:
+       src: "{{ W_PATH }}"/sql-file.sql
+       dest: /opt/docker/nodeapp/sql-file.sql
+    - name: Down Docker Compose
+      docker_compose:
+       project_src: "{{ W_PATH }}"/docker-compose.yml
+       state: absent
+    - name: Run Docker Compose
+      docker_compose:
+       project_src: "{{ W_PATH }}"/docker-compose.yml
+       state: started
+       env:
+         dimage: "{{ docker_image_name }}"
