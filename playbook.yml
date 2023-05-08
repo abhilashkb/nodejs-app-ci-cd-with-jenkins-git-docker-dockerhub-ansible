@@ -13,10 +13,8 @@
 
     - name: Stop and remove running container
       docker_container:
-        name: "{{ docker_container_name }}"
-        state: stopped
-        remove: yes
-
+        name: "my-nodeapp"
+        state: absent
     - name: Run Docker container
       docker_container:
         name: "my-nodeapp"
