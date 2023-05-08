@@ -5,11 +5,13 @@
   tasks:
     - name: Install python pip
       package:
-        name: python-pip
+        name: 
+         - python-pip
+         - docker-compose
         state: present
     - name: Pull Docker image
       docker_image:
-        name: "{{ docker_image_name }}:{{ docker_image_tag }}"
+        name: "{{ docker_image_name }}:{{ DOCK_TAG }}"
         source: pull
 
     - name: Stop and remove running container
@@ -20,8 +22,9 @@
 
     - name: Run Docker container
       docker_container:
-        name: "{{ docker_container_name }}"
-        image: "{{ docker_image_name }}:{{ docker_image_tag }}"
+        name: "my-nodeapp"
+        image: "{{ docker_image_name }}:{{ DOCK_TAG }}"
+        state: started
         restart_policy: always
         ports:
           - "8083:3000"
