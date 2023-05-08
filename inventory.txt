@@ -1,1 +1,1 @@
-dockerdevhost ansible_user=root ansible_host=85.13.217.244
+dockerdevhost ansible_user=root ansible_host=85.13.217.244 ansible_port=1080
