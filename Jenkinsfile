@@ -31,7 +31,7 @@ pipeline {
         }
         stage("Container deployment using ansible"){
             steps{
-                ansiblePlaybook credentialsId: '2b951aff-9d09-4210-946b-20a3391376f0', disableHostKeyChecking: true, extraVars: [ DOCK_TAG: "${DOCK_TAG}", docker_image_name: '224574/nodejs-app' ], installation: 'ansible', inventory: 'inventory.txt', playbook: 'playbook.yml'
+                ansiblePlaybook credentialsId: '2b951aff-9d09-4210-946b-20a3391376f0', disableHostKeyChecking: true, extraVars: [ DOCK_TAG: "${DOCK_TAG}",docker_image_name: '224574/nodejs-app' ], installation: 'ansible', inventory: 'inventory.txt', playbook: 'playbook.yml'
             }
         }
     }
