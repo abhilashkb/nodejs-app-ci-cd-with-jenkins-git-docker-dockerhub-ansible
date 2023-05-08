@@ -9,6 +9,9 @@
          - python-pip
          - docker-compose
         state: present
+    - name: Install Docker Module for Python
+      pip:
+         name: docker
     - name: Pull Docker image
       docker_image:
         name: "{{ docker_image_name }}:{{ DOCK_TAG }}"
