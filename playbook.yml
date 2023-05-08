@@ -3,12 +3,6 @@
   hosts: dockerdevhost
   become: true
   tasks:
-    - name: Install python pip
-      package:
-        name: 
-         - python-pip
-         - docker-compose
-        state: present
     - name: Install Docker Module for Python
       pip:
          name: docker
