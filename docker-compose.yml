@@ -1,7 +1,7 @@
 version: "2"
 services:
         node-jsapp:
-                image: $(dimage)
+                image: "${nodeimg}"
                 ports:
                         - 8084:3000
         mysql:

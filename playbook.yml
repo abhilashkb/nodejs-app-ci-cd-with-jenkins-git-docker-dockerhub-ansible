@@ -10,23 +10,28 @@
       docker_image:
         name: "{{ docker_image_name }}:{{ DOCK_TAG }}"
         source: pull
-    - name: Creates directory
+    - name: Creates docker compose directory
       file:
        path: /opt/docker/nodeapp
        state: directory
-    - name: Copy file to remote host
+    - name: Copy compose file to remote host
       copy:
        src: "{{ item.src }}"
        dest: "{{ item.dest }}"
       with_items: 
-        - { src: "/var/lib/jenkins/workspace/nodjs-app-ansible-dockerhost/sql-file.sql", dest: /opt/docker/nodeapp/sql-file.sql }
-        - { src: "/var/lib/jenkins/workspace/nodjs-app-ansible-dockerhost/docker-compose.yml", dest: /opt/docker/nodeapp/docker-compose.yml }
+        - { src: "{{W_PATH}}/sql-file.sql", dest: /opt/docker/nodeapp/sql-file.sql }
+        - { src: "{{W_PATH}}/docker-compose.yml", dest: /opt/docker/nodeapp/docker-compose.yml }
+    - name: "Creating docker-compose .env file"
+      copy:
+       dest: /opt/docker/nodeapp/.env
+       content: |
+        nodeimg="{{ docker_image_name }}:{{ DOCK_TAG }}"
     - name: Down Docker Compose
-      command: docker-compose down
+      command: docker compose down
       args:
        chdir: /opt/docker/nodeapp/
     - name: Down Docker up
-      command: docker-compose up -d
+      command: docker compose up -d
       args:
        chdir: /opt/docker/nodeapp/
     
