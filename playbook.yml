@@ -16,15 +16,19 @@
        state: directory
     - name: Copy file to remote host
       copy:
-       src: "{{ W_PATH }}" /sql-file.sql
-       dest: /opt/docker/nodeapp/sql-file.sql
+       src: {{ item.src}}
+       dest: {{ item.dest }}
+      loop: 
+        - src: "{{ W_PATH }}"/sql-file.sql
+          dest: /opt/docker/nodeapp/sql-file.sql
+        - src: "{{ W_PATH }}"/docker-compose.yml
+          dest: /opt/docker/nodeapp/docker-compose.yml
     - name: Down Docker Compose
-      docker_compose:
-       project_src: "{{ W_PATH }}" /docker-compose.yml
-       state: absent
-    - name: Run Docker Compose
-      docker_compose:
-       project_src: "{{ W_PATH }}" /docker-compose.yml
-       state: started
-       env:
-         dimage: "{{ docker_image_name }}"
+      command: docker-compose down
+      args:
+       chdir: /opt/docker/nodeapp/
+    - name: Down Docker up
+      command: docker-compose up -d
+      args:
+       chdir: /opt/docker/nodeapp/
+    
