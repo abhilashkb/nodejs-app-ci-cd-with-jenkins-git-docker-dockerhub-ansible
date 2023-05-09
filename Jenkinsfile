@@ -8,11 +8,24 @@ pipeline {
     stages {
         stage('SCM checkout') {
             steps{
-                
+            catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') { 
             git branch: 'main', credentialsId: '3556331b-958c-41cd-b636-918833670bc2', url: 'https://github.com/abhilashkb/nodejs-app-ci-cd-with-jenkins-git-docker-dockerhub-ansible'
             script{
                 env.DOCK_TAG = getVersion()
             }
+            }
+            
+        }
+        post {
+            success {
+                    // Send success message for Stage 1 with completion time
+                    script{
+                        env.stageDuration = currentBuild.getDurationString()
+                    }
+                 //   def stageDuration = currentBuild.getDurationString()
+                    slackSend(color: 'good', message: "Stage 1 completed successfully. Total duration: ${stageDuration}")
+            }
+            
             }
         }
         stage("Docker Build"){
