@@ -19,9 +19,9 @@
        src: {{ item.src }}
        dest: {{ item.dest }}
       loop: 
-        - src: "{{ W_PATH }}/sql-file.sql"
+        - src: "/var/lib/jenkins/workspace/nodjs-app-ansible-dockerhost/sql-file.sql"
           dest: /opt/docker/nodeapp/sql-file.sql
-        - src: "{{ W_PATH }}/docker-compose.yml"
+        - src: "/var/lib/jenkins/workspace/nodjs-app-ansible-dockerhost/docker-compose.yml"
           dest: /opt/docker/nodeapp/docker-compose.yml
     - name: Down Docker Compose
       command: docker-compose down
