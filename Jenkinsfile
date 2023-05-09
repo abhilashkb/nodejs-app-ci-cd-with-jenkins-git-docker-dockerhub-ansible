@@ -29,7 +29,7 @@ pipeline {
                 sh "docker push 224574/nodejs-app:${DOCK_TAG}"
             }
         }
-        stage("Container deployment using ansible"){
+        stage("Container deployment using ansible-playbook"){
             steps{
                 ansiblePlaybook credentialsId: '2b951aff-9d09-4210-946b-20a3391376f0', disableHostKeyChecking: true, extras: '-e DOCK_TAG="${DOCK_TAG}" -e W_PATH="${WORKSPACE}" -e docker_image_name=224574/nodejs-app', installation: 'ansible', inventory: 'inventory.txt', playbook: 'playbook.yml'
             }
