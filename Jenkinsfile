@@ -9,7 +9,9 @@ def postStageNotification(String stageName, String stageResult) {
             script {
                 if (stageResult == 'SUCCESS') {
                     // Send success message for the stage with completion time
-                    def stageDuration = currentBuild.getDurationString()
+                    script{
+                        env.stageDuration = currentBuild.getDurationString()
+                    }
                     slackSend(color: 'good', message: "${stageName} completed successfully. Total duration: ${stageDuration}")
                 } else {
                     // Send failure message for the stage with error message
