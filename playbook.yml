@@ -16,7 +16,7 @@
        state: directory
     - name: Copy file to remote host
       copy:
-       src: {{ item.src}}
+       src: {{ item.src }}
        dest: {{ item.dest }}
       loop: 
         - src: "{{ W_PATH }}/sql-file.sql"
