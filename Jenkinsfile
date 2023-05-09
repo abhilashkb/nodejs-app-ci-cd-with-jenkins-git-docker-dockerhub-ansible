@@ -3,6 +3,23 @@ def getVersion(){
  commitid = sh returnStdout: true, script: '''git rev-parse HEAD'''
  return commitid
 }
+def postStageNotification(String stageName, String stageResult) {
+    post {
+        always {
+            script {
+                if (stageResult == 'SUCCESS') {
+                    // Send success message for the stage with completion time
+                    def stageDuration = currentBuild.getDurationString()
+                    slackSend(color: 'good', message: "${stageName} completed successfully. Total duration: ${stageDuration}")
+                } else {
+                    // Send failure message for the stage with error message
+                    def errorMessage = currentBuild.rawBuild.getLog(1000).findAll { it.contains("[${stageName}]") }.last()
+                    slackSend(color: 'danger', message: "${stageName} failed with error:\n${errorMessage}")
+                }
+            }
+        }
+    }
+}
 pipeline {
     agent any
     stages {
@@ -14,19 +31,9 @@ pipeline {
                 env.DOCK_TAG = getVersion()
             }
             }
-            
+          postStageNotification('SCM checkout', currentBuild.result.toString())  
         }
-        post {
-            success {
-                    // Send success message for Stage 1 with completion time
-                    script{
-                        env.stageDuration = currentBuild.getDurationString()
-                    }
-                 //   def stageDuration = currentBuild.getDurationString()
-                    slackSend(color: 'good', message: "Stage 1 completed successfully. Total duration: ${stageDuration}")
-            }
-            
-            }
+
         }
         stage("Docker Build"){
             steps{
