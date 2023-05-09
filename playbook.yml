@@ -24,7 +24,7 @@
         - src: "/var/lib/jenkins/workspace/nodjs-app-ansible-dockerhost/docker-compose.yml"
           dest: /opt/docker/nodeapp/docker-compose.yml
     - name: Down Docker Compose
-      command: docker-compose down
+      command: docker-compose downn
       args:
        chdir: /opt/docker/nodeapp/
     - name: Down Docker up
