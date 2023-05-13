@@ -84,8 +84,6 @@ git clone https://github.com/abhilashkb/nodejs-app-ci-cd-with-jenkins-git-docker
     - Check the SonarQube server for code analysis results and quality metrics.
     - Monitor the Slack channel for deployment notifications and alerts.
 
-Certainly! Here's an example of a screenshot section you can add to your README file to demonstrate your project:
-
 ## Screenshots
 
 Included relevant screenshots of the project to provide visual representation and demonstrate its functionality. Here are some example screenshots:
