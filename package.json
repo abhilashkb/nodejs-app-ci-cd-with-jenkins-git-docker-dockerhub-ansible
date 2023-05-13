@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "User registration and user login application developed with Node.js, Express.js and MySQL",
   "main": "app.js",
-  "author": "Yusuf Sezer <yusufsezer@mail.com> (https://www.yusufsezer.com/)",
+  "author": "Abhilash K B <abhilashkb9020@mail.com> (https://devopsjourney.life/)",
   "license": "MIT",
   "private": true,
   "keywords": [],
