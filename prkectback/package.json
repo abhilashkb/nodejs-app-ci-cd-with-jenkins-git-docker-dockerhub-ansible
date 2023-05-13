@@ -1,0 +1,23 @@
+{
+  "name": "node-relo",
+  "version": "1.0.0",
+  "description": "User registration and user login application developed with Node.js, Express.js and MySQL",
+  "main": "app.js",
+  "author": "Abhilash K B  <abhilashkb9020@mail.com> (https://devopsjouerny.life/)",
+  "license": "MIT",
+  "private": true,
+  "keywords": [],
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.6",
+    "debug": "~4.3.4",
+    "express": "~4.18.2",
+    "express-session": "~1.17.3",
+    "http-errors": "~2.0.0",
+    "pug": "~3.0.2",
+    "morgan": "~1.10.0",
+    "mysql": "^2.18.1"
+  }
+}
