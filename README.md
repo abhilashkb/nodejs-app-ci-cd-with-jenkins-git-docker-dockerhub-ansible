@@ -35,7 +35,7 @@ git clone https://github.com/abhilashkb/nodejs-app-ci-cd-with-jenkins-git-docker
 2. Configure the App:
 
    - Open the project directory.
-   - Update the app configuration file (`config.js`) with the necessary database connection details and other settings.
+   - Update the app configuration file (`db.js`) with the necessary database connection details and other settings.
 
 3. Set Up Jenkins:
 
@@ -103,7 +103,7 @@ Included relevant screenshots of the project to provide visual representation an
 4. **Docker Container Deployment**: This screenshot illustrates the successful deployment of the Node.js application on the Docker host. It verifies that the application is up and running.
 
    ![Docker Container Deployment](images/dockerhost.png)
-
+   
 
 I hope this helps! Let me know if you have any further questions.
 ## Acknowledgments
